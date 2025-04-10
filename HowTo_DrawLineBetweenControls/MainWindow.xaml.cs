@@ -11,6 +11,7 @@ namespace HowTo_DrawLineBetweenControls;
 public partial class MainWindow : Window
 {
     private Button Target { get; set; }
+    private Path? Line { get; set; }
     public MainWindow()
     {
         InitializeComponent();
@@ -26,6 +27,11 @@ public partial class MainWindow : Window
 
     private void DrawLineToTarget(Button source)
     {
+        if(Line is not null)
+        {
+            TheGridParent.Children.Remove(Line);
+            Line = null;
+        }
         var pos1 = source.TranslatePoint(new Point(), TheGrid);
         pos1.X += source.Width / 2;
         pos1.Y += source.Height / 2;
@@ -34,9 +40,9 @@ public partial class MainWindow : Window
         pos2.Y += Target.Height / 2;
 
         string pathString = $"M {pos1.X},{pos1.Y} L {pos2.X},{pos2.Y}";
-        Path line = new();
-        line.Stroke = Brushes.Black;
-        line.Data = Geometry.Parse(pathString);
-        TheGridParent.Children.Add(line);
+        Line = new();
+        Line.Stroke = Brushes.Black;
+        Line.Data = Geometry.Parse(pathString);
+        TheGridParent.Children.Add(Line);
     }
 }

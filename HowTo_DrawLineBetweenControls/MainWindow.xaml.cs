@@ -1,23 +1,15 @@
-﻿using System.Diagnostics;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace HowTo_DrawLineBetweenControls;
 
 /// <summary>
-/// Interaction logic for MainWindow.xaml
+/// Note: Resizing window is not accounted for.
 /// </summary>
 public partial class MainWindow : Window
 {
-
     private Button Target { get; set; }
     public MainWindow()
     {
@@ -29,10 +21,10 @@ public partial class MainWindow : Window
     {
         var btn = sender as Button;
         if (btn is null) return;
-        DrawLineToTarget(btn, e);
+        DrawLineToTarget(btn);
     }
 
-    private void DrawLineToTarget(Button source, RoutedEventArgs e)
+    private void DrawLineToTarget(Button source)
     {
         var pos1 = source.TranslatePoint(new Point(), TheGrid);
         pos1.X += source.Width / 2;

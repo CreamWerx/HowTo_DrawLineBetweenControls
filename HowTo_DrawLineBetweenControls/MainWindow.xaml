@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="480" Width="800">
     <Grid x:Name="TheGridParent">
+        <Button x:Name="TargetA" Content="Target" Width="70" Height="40"/>
         <Grid x:Name="TheGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

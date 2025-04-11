@@ -15,7 +15,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        Target = TA1;
+        Target = TargetA;
     }
 
     private void B_Click(object sender, RoutedEventArgs e)
@@ -32,17 +32,19 @@ public partial class MainWindow : Window
             TheGridParent.Children.Remove(Line);
             Line = null;
         }
-        var pos1 = source.TranslatePoint(new Point(), TheGrid);
-        pos1.X += source.Width / 2;
-        pos1.Y += source.Height / 2;
-        var pos2 = Target.TranslatePoint(new Point(), TheGrid);
-        pos2.X += Target.Width / 2;
-        pos2.Y += Target.Height / 2;
+        var centerOfSourceControl = source.TranslatePoint(new Point(), TheGrid);
+        centerOfSourceControl.X += source.Width / 2;
+        centerOfSourceControl.Y += source.Height / 2;
+        var centerOfTargetControl = Target.TranslatePoint(new Point(), TheGrid);
+        centerOfTargetControl.X += Target.Width / 2;
+        centerOfTargetControl.Y += Target.Height / 2;
 
-        string pathString = $"M {pos1.X},{pos1.Y} L {pos2.X},{pos2.Y}";
-        Line = new();
-        Line.Stroke = Brushes.Black;
-        Line.Data = Geometry.Parse(pathString);
+        string pathString = $"M {centerOfSourceControl.X},{centerOfSourceControl.Y} L {centerOfTargetControl.X},{centerOfTargetControl.Y}";
+        Line = new()
+        {
+            Stroke = Brushes.Black,
+            Data = Geometry.Parse(pathString)
+        };
         TheGridParent.Children.Add(Line);
     }
 }
